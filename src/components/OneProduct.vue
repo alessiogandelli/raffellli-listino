@@ -35,10 +35,9 @@ export default {
                 this.addProduct(product);
 
             }
+        
       },
-      addCurrentProduct(product) {
-            this.currentProduct(product);
-      },
+
   },
 
   computed: {

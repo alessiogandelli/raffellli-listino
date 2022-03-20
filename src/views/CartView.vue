@@ -1,50 +1,70 @@
 <template>
-<div>
-  <v-card max-width="700" class="mx-auto">
-    <v-data-table
-      :headers="headers"
-      :items="desserts"
-      :items-per-page="5"
-      class="elevation-1"
-    >
-      <template v-slot:item="row">
-        <tr>
-          <td>{{ row.item.name }}</td>
-          <td>{{ row.item.calories }}</td>
-          <td>
-            <v-btn
-              class="mx-2"
-              fab
-              dark
-              small
-              color="red"
-              @click="onButtonClick(row.item)"
-            >
-              <v-icon dark>mdi-delete</v-icon>
-            </v-btn>
-          </td>
-        </tr>
-      </template>
-    </v-data-table>
-  </v-card>
+  <div>
+    <v-card max-width="700" class="mx-auto">
+      <v-data-table
+        :headers="headers"
+        :items="getProductsInCart"
+        :items-per-page="5"
+        class="elevation-1"
+      >
+        <template v-slot:item="row">
+          <tr>
+            <td>{{ row.item.name }}</td>
+            <td>{{ row.item.price }}</td>
+            <td>{{ row.item.um }}</td>
+            <td>
+              <v-text-field  v-model="quantita" :rules="rules" :suffix="row.item.um" type="number" ></v-text-field>
+            </td>
 
-  <v-btn depressed absolute right large dark color="indigo"  @click="$router.push('cart')" ><v-icon>invia</v-icon></v-btn>
-</div>
+            <td>
+              <v-btn
+                class="mx-2"
+                fab
+                dark
+                small
+                color="red"
+                @click="onButtonClick(row.item)"
+              >
+                <v-icon dark>mdi-delete</v-icon>
+              </v-btn>
+            </td>
+          </tr>
+        </template>
+      </v-data-table>
+    </v-card>
+
+    <v-btn
+      depressed
+      absolute
+      right
+      large
+      dark
+      class="mx-auto"
+      color="indigo"
+      @click="$router.push('cart')"
+      ><v-icon>invia</v-icon></v-btn
+    >
+  </div>
 </template>
 
 <script lang="ts">
 /* eslint-disable */
 
 import Vue from "vue";
+import { mapGetters, mapActions } from "vuex";
 
 export default Vue.extend({
   components: {},
   data() {
     return {
+      quantita:[],
       headers: [
         { text: "prodotto", align: "start", sortable: false, value: "name" },
         { text: "prezzo", value: "calories" },
-        { text: "quantita", value: "fat" },
+        { text: "unità di misura", value: "fat" },
+        { text: "quantita" },
+
+        { text: "cancella" },
       ],
       desserts: [
         {
@@ -129,6 +149,9 @@ export default Vue.extend({
         },
       ],
     };
+  },
+  computed: {
+    ...mapGetters(["getProductsInCart"]),
   },
 
   name: "Cart",
