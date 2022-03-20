@@ -4,7 +4,7 @@
 
     <v-layout wrap justify-space-around>
 
-      <v-flex  v-for="(product, index) in products" :key="index"> 
+      <v-flex  v-for="(product, index) in filterProducts" :key="index"> 
           <OneProduct :prodotto="product"/>
       </v-flex>
     </v-layout>
@@ -20,10 +20,14 @@ export default {
   props: ["products"],
   components:{OneProduct},
   data: () => ({
-    images: Array.from(new Array(50)).map((e, i) => ({
-      num: i + 1,
-      src: `https://picsum.photos/300/400?image=${i + 1}`,
-    })),
+    // for local 
+
+    // images: Array.from(new Array(50)).map((e, i) => ({
+    //   num: i + 1,
+    //   src: `https://picsum.photos/300/400?image=${i + 1}`,
+    // })),
+
+    testo : 'terra'
 
   }),
   computed: {

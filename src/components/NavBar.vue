@@ -16,7 +16,7 @@
       </v-btn>
 
       <v-text-field
-            v-model="title"
+            v-model="testo"
             :rules="rules"
             
             hint="This field uses counter prop"
@@ -24,7 +24,7 @@
           ></v-text-field>
 
       <v-spacer></v-spacer>
-      <v-badge color="green" :content="chartSize" :value="chartSize" overlap > 
+      <v-badge color="green" :content="getProductsInCart.length" :value="getProductsInCart.length" overlap > 
         <v-btn depressed large dark color="indigo" @click="$router.push('cart')" ><v-icon>carrello</v-icon></v-btn >
       </v-badge>
     </v-toolbar>
@@ -44,11 +44,14 @@ export default {
     return {
       chartSize: 0,
       drawer: false,
+      testo:''
     };
   },
 
   computed: {
     ...mapGetters(["getProductsInCart"]),
+    
   }
+
   };
 </script>
