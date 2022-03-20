@@ -4,7 +4,7 @@ import axios from 'axios'
 // import dotenv from 'dotenv';
 // dotenv.config()
 
-const listino = 'https://api.ninoxdb.de/v1/teams/yF798GWcx2GyC9Sf2/databases/g66xh8o7t0zx/tables/X/records?perPage=1000'
+const listino = 'https://api.ninoxdb.de/v1/teams/yF798GWcx2GyC9Sf2/databases/g66xh8o7t0zx/tables/X/records?perPage=10'
 const token =  process.env.VUE_APP_NINOX_TOKEN
 console.log(token)
 

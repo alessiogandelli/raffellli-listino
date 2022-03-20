@@ -24,9 +24,9 @@
           ></v-text-field>
 
       <v-spacer></v-spacer>
-      <v-btn depressed large dark color="indigo" @click="$router.push('cart')"
-        ><v-icon>carrello</v-icon></v-btn
-      >
+      <v-badge color="green" :content="chartSize" :value="chartSize" overlap > 
+        <v-btn depressed large dark color="indigo" @click="$router.push('cart')" ><v-icon>carrello</v-icon></v-btn >
+      </v-badge>
     </v-toolbar>
 
     <v-navigation-drawer app v-model="drawer" class="indigo">
@@ -37,11 +37,18 @@
 
 
 <script>
+import { mapActions, mapGetters } from "vuex";
+
 export default {
   data() {
     return {
+      chartSize: 0,
       drawer: false,
     };
   },
-};
+
+  computed: {
+    ...mapGetters(["getProductsInCart"]),
+  }
+  };
 </script>

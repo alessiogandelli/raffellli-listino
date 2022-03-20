@@ -7,10 +7,10 @@
 
     <v-card-title> {{prodotto.name}} </v-card-title>
 
-    <v-card-subtitle>{{prodotto.price}} </v-card-subtitle>
+    <v-card-subtitle>{{prodotto.price}} € al {{prodotto.um}} </v-card-subtitle>
 
     <v-card-actions>
-      <v-btn color="indigo" dark max-width="190"> Aggiungi al carrello </v-btn>
+      <v-btn color="indigo" dark max-width="190" @click="addProductToCart(prodotto)"> Aggiungi al carrello </v-btn>
     </v-card-actions>
 
   </v-card>
@@ -19,11 +19,31 @@
 
 <script>
 /* eslint-disable */
+import { mapActions, mapGetters } from "vuex";
+
 export default {
   props: ["prodotto"],
   data: () => ({
     show: false,
   }),
+  methods: {
+      ...mapActions(["addProduct", "currentProduct"]),
+
+      addProductToCart(product) {
+        console.log('add', product.name)
+            if(!this.getProductsInCart.some(e => e.name == product.name)){
+                this.addProduct(product);
+
+            }
+      },
+      addCurrentProduct(product) {
+            this.currentProduct(product);
+      },
+  },
+
+  computed: {
+    ...mapGetters(["getProductsInCart"]),
+  }
 };
 </script>
 

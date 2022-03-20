@@ -1,6 +1,13 @@
 <template>
   <div class="home">
-    <v-card max-width="750" class="mx-auto"> <ProductList :products="getTutti"/></v-card>
+    <v-card max-width="750" class="mx-auto"> 
+      <v-skeleton-loader
+        class="mx-auto"
+        max-width="300"
+        type="card" 
+         v-if="getTutti == {}"></v-skeleton-loader>
+      <ProductList :products="getTutti"/>
+    </v-card>
   </div>
 </template>
 
