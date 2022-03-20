@@ -18,8 +18,12 @@ export default Vue.extend({
   components : {
     NavBar
   },
-  data: () => ({
-    //
-  }),
+  async created() {
+    console.log("ciaooooooo");
+    this.$store.dispatch("getProdotti").then(() => {
+      console.log("dispaccio");
+    });
+  },
+
 });
 </script>

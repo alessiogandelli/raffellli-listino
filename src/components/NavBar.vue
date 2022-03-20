@@ -15,6 +15,14 @@
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
 
+      <v-text-field
+            v-model="title"
+            :rules="rules"
+            
+            hint="This field uses counter prop"
+            label="Cerca un prodotto"
+          ></v-text-field>
+
       <v-spacer></v-spacer>
       <v-btn depressed large dark color="indigo" @click="$router.push('cart')"
         ><v-icon>carrello</v-icon></v-btn

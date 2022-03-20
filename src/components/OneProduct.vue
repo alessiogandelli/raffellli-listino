@@ -5,9 +5,9 @@
       height="200px"
     ></v-img>
 
-    <v-card-title> Cemento </v-card-title>
+    <v-card-title> {{prodotto.name}} </v-card-title>
 
-    <v-card-subtitle> 50 € </v-card-subtitle>
+    <v-card-subtitle>{{prodotto.price}} </v-card-subtitle>
 
     <v-card-actions>
       <v-btn color="indigo" dark max-width="190"> Aggiungi al carrello </v-btn>
@@ -20,6 +20,7 @@
 <script>
 /* eslint-disable */
 export default {
+  props: ["prodotto"],
   data: () => ({
     show: false,
   }),
