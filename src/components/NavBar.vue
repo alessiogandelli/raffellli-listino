@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <v-toolbar flat app height="100" @click="$router.push('/#')">
+    <v-toolbar flat fixed app height="100" @click="$router.push('/#')">
       <!-- <v-app-bar-nav-icon  @click="drawer = !drawer"></v-app-bar-nav-icon> -->
       <v-toolbar-title class="text-uppercase black--text" >
         <span> Logo Raffelli</span>
