@@ -11,9 +11,9 @@
           <tr>
             <td>{{ row.item.name }}</td>
             <td>{{ row.item.price }}</td>
-            <td>{{ row.item.um }}</td>
+            <td>{{ row.index }}</td>
             <td>
-              <v-text-field  v-model="quantita" :rules="rules" :suffix="row.item.um" type="number" ></v-text-field>
+              <v-text-field  v-model="qta[row.index]" :rules="rules" :suffix="row.item.um" type="number" ></v-text-field>
             </td>
 
             <td>
@@ -55,9 +55,11 @@ import { mapGetters, mapActions } from "vuex";
 
 export default Vue.extend({
   components: {},
+  name: "Cart",
   data() {
     return {
-      quantita:[],
+      email: '',
+      qta:[],
       headers: [
         { text: "prodotto", align: "start", sortable: false, value: "name" },
         { text: "prezzo", value: "calories" },
@@ -154,6 +156,9 @@ export default Vue.extend({
     ...mapGetters(["getProductsInCart"]),
   },
 
-  name: "Cart",
-});
+  methods: {
+    
+  }
+
+  });
 </script>
