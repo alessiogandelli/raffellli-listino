@@ -4,7 +4,7 @@ import axios from 'axios'
 // import dotenv from 'dotenv';
 // dotenv.config()
 
-const listino = 'https://api.ninoxdb.de/v1/teams/yF798GWcx2GyC9Sf2/databases/g66xh8o7t0zx/tables/X/records?perPage=10'
+const listino = 'https://api.ninoxdb.de/v1/teams/yF798GWcx2GyC9Sf2/databases/g66xh8o7t0zx/tables/X/records?perPage=100'
 const token =  process.env.VUE_APP_NINOX_TOKEN
 console.log(token)
 
@@ -58,17 +58,23 @@ export default new Vuex.Store({
       
 
       prodotti: [],
+      selected:[],
       cartProducts: [],
       currentProduct: {},
       showPopupCart: false,
     },
   
     getters: {
-      get13: state => state.prodotti.filter(prodotto => prodotto.categoria == 13),
-      get3: state => state.prodotti.filter(prodotto => prodotto.categoria == 3),
-      get5: state => state.prodotti.filter(prodotto => prodotto.categoria == 5),
-      get6: state => state.prodotti.filter(prodotto => prodotto.categoria == 6),
+ 
       getTutti: state => state.prodotti,
+      selected: (state)  => {
+        return state.selected
+      },
+
+      // selected: (state) => (id) => {
+      //   return (state.prodotti.filter(prodotto => prodotto.categoria == id))
+      // },
+      
   
   
       getProductsInCart: state => state.cartProducts,
@@ -86,6 +92,9 @@ export default new Vuex.Store({
       CURRENT_PRODUCT: (state, product) => {
         state.currentProduct = product;
       },
+      SET_SELECTED: (state, cat) => {
+        state.selected = state.prodotti.filter(prodotto => prodotto.categoria == cat)
+      },
 
       SHOW_POPUP_CART: (state) => {
         state.showPopupCart = !state.showPopupCart;
@@ -94,6 +103,7 @@ export default new Vuex.Store({
       SET_PROD: (state, products) => {
         console.log('modifica ')
         state.prodotti = products
+        state.selected = products
         console.log(products)
       }
     },
@@ -107,6 +117,10 @@ export default new Vuex.Store({
       },
       currentProduct: (context, product) => {
         context.commit('CURRENT_PRODUCT', product);
+      },
+      updateChart: (context, cat) =>{
+        console.log('update chart')
+        context.commit('SET_SELECTED', cat);
       },
 
       showOrHiddenPopupCart: (context) => {

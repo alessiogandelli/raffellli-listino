@@ -27,7 +27,7 @@ export default {
     //   src: `https://picsum.photos/300/400?image=${i + 1}`,
     // })),
 
-    testo : 'terra'
+    testo : ''
 
   }),
   computed: {

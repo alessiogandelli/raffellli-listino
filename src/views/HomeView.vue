@@ -6,7 +6,7 @@
         max-width="300"
         type="card" 
          v-if="getTutti == {}"></v-skeleton-loader>
-      <ProductList :products="getTutti"/>
+      <ProductList :products="selected"/>
     </v-card>
   </div>
 </template>
@@ -23,7 +23,7 @@ export default Vue.extend({
 
   computed: {
     ...mapGetters([
-      'getTutti',
+      'selected',
     ]),
   },
 });

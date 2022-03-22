@@ -13,7 +13,7 @@
             <td>{{ row.item.price }}</td>
             <td>{{ row.index }}</td>
             <td>
-              <v-text-field  v-model="qta[row.index]" :rules="rules" :suffix="row.item.um" type="number" ></v-text-field>
+              <v-text-field  v-model="qta[row.index]" :rules="rules" :suffix="row.item.um" type="number" placeholder="1"></v-text-field>
             </td>
 
             <td>
