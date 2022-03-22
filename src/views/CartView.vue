@@ -23,7 +23,7 @@
                 dark
                 small
                 color="red"
-                @click="onButtonClick(row.item)"
+                @click="deleteItem(row.index)"
               >
                 <v-icon dark>mdi-delete</v-icon>
               </v-btn>
@@ -41,7 +41,7 @@
       dark
       class="mx-auto"
       color="indigo"
-      @click="$router.push('cart')"
+      @click="send()"
       ><v-icon>invia</v-icon></v-btn
     >
   </div>
@@ -157,7 +157,16 @@ export default Vue.extend({
   },
 
   methods: {
-    
+    ...mapActions(["removeProduct"]),
+
+    deleteItem(el:number){
+      this.removeProduct(el)
+      console.log('delete', el)
+    },
+
+    send(){
+      console.log('invio')
+    }
   }
 
   });
