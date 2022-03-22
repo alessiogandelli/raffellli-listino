@@ -13,7 +13,13 @@
             <td>{{ row.item.price }}</td>
             <td>{{ row.index }}</td>
             <td>
-              <v-text-field  v-model="qta[row.index]" :rules="rules" :suffix="row.item.um" type="number" placeholder="1"></v-text-field>
+              <v-text-field
+                v-model="qta[row.index]"
+                :rules="rules"
+                :suffix="row.item.um"
+                type="number"
+                placeholder="1"
+              ></v-text-field>
             </td>
 
             <td>
@@ -33,17 +39,46 @@
       </v-data-table>
     </v-card>
 
-    <v-btn
-      depressed
-      absolute
-      right
-      large
-      dark
-      class="mx-auto"
-      color="indigo"
-      @click="send()"
-      ><v-icon>invia</v-icon></v-btn
-    >
+    <v-container max-width="500" >
+      <v-row no-gutters>
+        <v-col>
+          <v-spacer></v-spacer>
+        </v-col>
+        <v-col >
+          <v-text-field
+            v-model="email"
+            outlined
+            append-icon=""
+            :rules="rules"
+            max-width="100"
+            label="inserisci la tua email"
+          >
+          </v-text-field>
+        </v-col>
+      </v-row>
+
+      <v-row >
+        <v-col>
+          <v-btn
+            :disabled = 'email.length === 0'
+            active-class=""
+            depressed
+            absolute
+            right
+            large
+            dark
+            class="mx-auto"
+            color="indigo"
+            @click="send()"
+          >
+            <v-icon>invia</v-icon>
+          </v-btn>
+        </v-col>
+        <v-col>
+          <v-spacer></v-spacer>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
@@ -52,14 +87,15 @@
 
 import Vue from "vue";
 import { mapGetters, mapActions } from "vuex";
+import { Prodotto } from "@/interfaces";
 
 export default Vue.extend({
   components: {},
   name: "Cart",
   data() {
     return {
-      email: '',
-      qta:[],
+      email: "",
+      qta: [],
       headers: [
         { text: "prodotto", align: "start", sortable: false, value: "name" },
         { text: "prezzo", value: "calories" },
@@ -159,15 +195,26 @@ export default Vue.extend({
   methods: {
     ...mapActions(["removeProduct"]),
 
-    deleteItem(el:number){
-      this.removeProduct(el)
-      console.log('delete', el)
+    deleteItem(el: number) {
+      this.removeProduct(el);
+      console.log("delete", el);
     },
 
-    send(){
-      console.log('invio')
-    }
-  }
+    send() {
+      const prodotti = this.getProductsInCart;
+      let carrello: { utente: string; cose: { prod: string; qta: number }[] } =
+        { utente: this.email, cose: [] };
 
-  });
+      prodotti.forEach((prod: Prodotto, i: number) => {
+        if (this.qta[i]) {
+          carrello.cose.push({ prod: prod["name"], qta: this.qta[i] });
+        } else {
+          carrello.cose.push({ prod: prod["name"], qta: 1 });
+        }
+      });
+
+      console.log(carrello);
+    },
+  },
+});
 </script>
